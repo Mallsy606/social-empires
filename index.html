@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="utf-8">
@@ -8,13 +8,14 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
         body, html { width: 100%; height: 100%; background: #121212; color: #fff; overflow: hidden; display: flex; flex-direction: column; }
         
-        /* Barra de navegación superior con botones */
+        /* Barra de navegación superior */
         .navbar {
             background: #1f1f1f;
-            padding: 10px;
+            width: 100%;
+            padding: 12px;
             display: flex;
-            justify-content: center;
-            gap: 15px;
+            justify-content: space-around;
+            align-items: center;
             border-bottom: 2px solid #333;
             z-index: 10;
         }
@@ -22,18 +23,23 @@
             background: #ff4757;
             color: white;
             border: none;
-            padding: 8px 16px;
-            border-radius: 5px;
+            padding: 10px 20px;
+            border-radius: 6px;
             font-weight: bold;
+            font-size: 14px;
             cursor: pointer;
+            flex: 1;
+            margin: 0 5px;
+            max-width: 120px;
             transition: background 0.2s;
         }
         .nav-btn:hover { background: #ff6b81; }
         
-        /* Contenedor de las páginas o contenidos */
+        /* Contenedor de las páginas */
         .content-container {
             flex: 1;
             position: relative;
+            width: 100%;
             overflow: hidden;
         }
         .page {
@@ -44,20 +50,30 @@
             justify-content: center;
             align-items: center;
             background: #181818;
+            padding: 20px;
+            text-align: center;
         }
         .page.active { display: flex; }
 
-        /* Estilo para el contenedor del juego a pantalla completa dentro de la pestaña */
-        .game-frame {
-            width: 100%;
-            height: 100%;
-            border: none;
+        /* Estilo para el botón de juego dentro de la pestaña */
+        .game-launch-btn {
+            background: #2ed573;
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: background 0.2s;
         }
+        .game-launch-btn:hover { background: #26af5f; }
     </style>
 </head>
 <body>
 
-    <!-- Botones de navegación integrados -->
+    <!-- Botones de navegación superiores -->
     <div class="navbar">
         <button class="nav-btn" onclick="cambiarPagina('inicio')">Inicio</button>
         <button class="nav-btn" onclick="cambiarPagina('juego')">Juego</button>
@@ -69,13 +85,15 @@
         <!-- Página de Inicio -->
         <div id="inicio" class="page active">
             <h2>Bienvenido a tu Panel Principal</h2>
-            <p style="color: #aaa; margin-top: 10px;">Selecciona "Juego" en la barra superior.</p>
+            <p style="color: #aaa; margin-top: 10px;">Toca la pestaña "Juego" arriba para iniciar.</p>
         </div>
 
-        <!-- Página de Juego (Dofus Touch embebido) -->
+        <!-- Página de Juego (Aquí está el botón que activa el Intent en Sketchware) -->
         <div id="juego" class="page">
-            <!-- Aquí puedes cambiar el enlace 'src' por la dirección web oficial del cliente de Dofus Touch o el juego web que desees -->
-            <iframe class="game-frame" src="https://www.dofustouch.com/" allowfullscreen></iframe>
+            <h2>Dofus Touch</h2>
+            <p style="color: #aaa; margin-top: 10px;">Presiona el botón para abrir el juego nativo:</p>
+            <!-- Este enlace especial será interceptado por Sketchware -->
+            <a href="intent://abrir_dofus" class="game-launch-btn">🎮 Jugar Dofus Touch</a>
         </div>
 
         <!-- Página de Ajustes -->
@@ -85,7 +103,6 @@
     </div>
 
     <script>
-        // Función de JavaScript para alternar entre pantallas de forma fluida
         function cambiarPagina(idPagina) {
             const pages = document.querySelectorAll('.page');
             pages.forEach(page => page.classList.remove('active'));
