@@ -19,7 +19,8 @@
             const ruffle = window.RufflePlayer.newest();
             const player = ruffle.createPlayer();
             document.getElementById("player").appendChild(player);
-            player.load("SocialEmpiresAIR.swf");
+            // Apuntamos al cargador principal Basesec en lugar del de empires directo
+            player.load("Basesec_AIR.swf");
         });
     </script>
 </body>
